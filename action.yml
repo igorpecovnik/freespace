@@ -10,9 +10,12 @@ runs:
     - name: Enable problem-matcher
       shell: bash
       run: |
+      
         if [[ $(df -hT | grep /$ | awk '{print $(NF-1)}' | sed 's/%//') -gt 70 ]]; then
-        echo "Purging"
-        sudo docker system prune -af  || true
-        sudo docker volume rm $(sudo docker volume ls -q) 2>/dev/null || true
+           echo "Purging"
+           sudo docker system prune -af  || true
+           sudo docker volume rm $(sudo docker volume ls -q) 2>/dev/null || true
         fi
-
+        
+        # clean ssh key folder
+        [[ -d "$HOME/.ssh" ]] && sudo rm -r "$HOME/.ssh"
