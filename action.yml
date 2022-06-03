@@ -18,4 +18,4 @@ runs:
         fi
         
         # clean ssh key folder
-        [[ -d "$HOME/.ssh" ]] && sudo rm -r "$HOME/.ssh" || true
+        [[ -f "$HOME/.ssh/known_hosts" ]] && sudo rm "$HOME/.ssh/known_hosts" || true
