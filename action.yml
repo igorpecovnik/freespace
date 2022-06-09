@@ -49,3 +49,4 @@ runs:
           [[ -d build/output/images ]] && sudo rm -rf build/output/images/* || true
 
           export TERM=dumb
+          export COLUMNS=40
