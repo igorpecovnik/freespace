@@ -46,3 +46,5 @@ runs:
           
           [[ -d build/.git ]] && sudo chown -R $USER:$USER build/.git || true
           [[ -d build/output/images ]] && sudo rm -rf build/output/images/* || true
+
+          export TERM=dumb
