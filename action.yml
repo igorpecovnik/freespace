@@ -22,6 +22,8 @@ runs:
 
         sudo mountpoint -q build/output/debs && sudo fusermount -u build/output/debs || true
         sudo mountpoint -q build/output/debs-beta && sudo fusermount -u build/output/debs-beta || true
+        sudo rm -rf build/output/debs/* build/output/debs-beta/*
+        
         
     - name: Fix permissions
       shell: bash
