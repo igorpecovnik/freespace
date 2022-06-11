@@ -8,8 +8,10 @@ runs:
   using: "composite"
   steps:
     - name: Enable problem-matcher
-      shell: bash
+      shell: bash      
       run: |
+      
+        sudo chmod 666 /var/run/docker.sock 
       
         if [[ $(df -hT | grep /$ | awk '{print $(NF-1)}' | sed 's/%//') -gt 70 ]]; then
            echo "Purging"
