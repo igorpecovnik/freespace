@@ -49,7 +49,7 @@ runs:
               sleep 10
           done
           
-          [[ -d build/.git ]] && sudo chown -R $USER:$USER build/.git || true
+          [[ -d build ]] && sudo chown -R $USER:$USER build/. || true
           [[ -d build/output/images ]] && sudo rm -rf build/output/images/* || true
 
           export TERM=dumb
