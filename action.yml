@@ -43,7 +43,7 @@ runs:
                   sudo mountpoint -q build/cache/toolchain &&  sudo fusermount -u build/cache/toolchain || true
               fi
               sudo mountpoint -q build/output/images && sudo fusermount -u build/output/images || true
-              [[ "$(df | grep "/.tmp" | wc -l)" -eq 0 && $(sudo mountpoint -q build/output/images; echo $?) -ne 1 ]] && sudo rm -rf build/.tmp && break
+              [[ "$(df | grep "/.tmp" | wc -l)" -eq 0 && $(sudo mountpoint -q build/output/images; echo $?) -ge 1 ]] && sudo rm -rf build/.tmp && break
               echo "Mounted temp directories. Trying to unmount."
               df | grep ".tmp" | awk '{print $6}' | xargs sudo umount 2>/dev/null || true
               sleep 10
