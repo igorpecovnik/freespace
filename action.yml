@@ -24,6 +24,7 @@ runs:
 
         sudo mountpoint -q build/output/debs && sudo fusermount -u build/output/debs || true
         sudo mountpoint -q build/output/debs-beta && sudo fusermount -u build/output/debs-beta || true
+        sudo mountpoint -q build/cache/rootfs && sudo fusermount -u build/cache/rootfs || true
         sudo rm -rf build/output/debs/* build/output/debs-beta/*
         
         
