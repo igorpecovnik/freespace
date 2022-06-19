@@ -42,8 +42,10 @@ runs:
               sudo pkill aarch64-binfmt-P || true
               sudo pkill pixz || true
               if [[ $(curl -s http://ifconfig.me) == "93.103.15.56" || $(curl -s http://ifconfig.me) == "188.227.12.36" ]]; then
-                  sudo mountpoint -q build/cache/rootfs &&  sudo fusermount -u build/cache/rootfs || true
-                  sudo mountpoint -q build/cache/toolchain &&  sudo fusermount -u build/cache/toolchain || true
+                  sudo mountpoint -q build/cache/rootfs && sudo fusermount -u build/cache/rootfs
+                  [[ $? -eq 0 ]] && sudo rm -rf build/cache/rootfs/*
+                  sudo mountpoint -q build/cache/toolchain && sudo fusermount -u build/cache/toolchain
+                  [[ $? -eq 0 ]] && sudo rm -rf build/cache/toolchain/*
               fi
               sudo mountpoint -q build/output/images && sudo fusermount -u build/output/images || true
               [[ "$(df | grep "/.tmp" | wc -l)" -eq 0 && $(sudo mountpoint -q build/output/images; echo $?) -ge 1 ]] && sudo rm -rf build/.tmp && break
