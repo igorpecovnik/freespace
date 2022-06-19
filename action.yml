@@ -25,13 +25,13 @@ runs:
         # tmp mount for checking images
         sudo mountpoint -q dl && sudo fusermount -u dl || true          
 
+        # standard mounts
         sudo mountpoint -q build/output/debs && sudo fusermount -u build/output/debs || true
         sudo mountpoint -q build/output/debs-beta && sudo fusermount -u build/output/debs-beta || true
-        sudo mountpoint -q build/cache/rootfs && sudo fusermount -u build/cache/rootfs || true
+        sudo mountpoint -q build/cache/rootfs && sudo fusermount -u build/cache/rootfs || true        
         sudo mountpoint -q build/cache/rootfs.upload && sudo fusermount -u build/cache/rootfs.upload || true
+        sudo mountpoint -q build/cache/toolchain && sudo fusermount -u build/cache/toolchain || true
         sudo rm -rf build/output/debs/* build/output/debs-beta/* /var/log/journal || true
-        
-        
         
     - name: Fix permissions
       shell: bash
@@ -54,6 +54,8 @@ runs:
               [[ "$(df | grep "/.tmp" | wc -l)" -eq 0 && $(sudo mountpoint -q build/output/images; echo $?) -ge 1 ]] && sudo rm -rf build/.tmp && break
               echo "Mounted temp directories. Trying to unmount."
               df | grep ".tmp" | awk '{print $6}' | xargs sudo umount 2>/dev/null || true
+              sudo rm -f build/cache/hash/*
+              sudo rm -f build/cache/hash-beta/*
               sleep 10
           done
 
