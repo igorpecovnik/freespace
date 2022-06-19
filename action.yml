@@ -22,6 +22,9 @@ runs:
         # clean ssh key folder
         [[ -f "$HOME/.ssh/known_hosts" ]] && sudo rm "$HOME/.ssh/known_hosts" || true
 
+        # tmp mount for checking images
+        sudo mountpoint -q dl && sudo fusermount -u dl || true          
+
         sudo mountpoint -q build/output/debs && sudo fusermount -u build/output/debs || true
         sudo mountpoint -q build/output/debs-beta && sudo fusermount -u build/output/debs-beta || true
         sudo mountpoint -q build/cache/rootfs && sudo fusermount -u build/cache/rootfs || true
