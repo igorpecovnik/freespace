@@ -11,7 +11,7 @@ runs:
       shell: bash      
       run: |
       
-        sudo chmod 666 /var/run/docker.sock 
+        sudo chmod 666 /var/run/docker.sock || true
       
         if [[ $(df -hT | grep /$ | awk '{print $(NF-1)}' | sed 's/%//') -gt 70 ]]; then
            echo "Purging"
